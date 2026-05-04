@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sign Up</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f4f4;
+      display: flex;  /*Enables Flexbox layout.Flexbox helps center elements easily.*/
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .box {
+      width: 330px;
+      padding: 25px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    input {
+      width: 90%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #25D366;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1ebe58;
+    }
+
+    a { text-decoration: none; color: #0b76ff; }
+  </style>
+<!--Firebase core library.-->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="firebase.js"></script>
+</head>
+
+<body>
+
+  <div class="box">
+    <h2>Create Account</h2>
+
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+
+    <button onclick="signup()">Sign Up</button>
+
+    <p>Already have an account? <a href="login.html">Login</a></p>
+
+    <p id="msg" style="color:red;"></p>
+  </div>
+
+  <script>
+    function signup() {
+      let email = document.getElementById("email").value;
+      let password = document.getElementById("password").value;
+
+      auth.createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        document.getElementById("msg").style.color = "green";
+        document.getElementById("msg").innerHTML = "Account created!";
+        setTimeout(() => window.location = "login.html", 1000);
+        //arrow function--// Arrow Function
+        //const myFunction = (x, y) => x * y;
+      })
+      .catch(error => {
+        document.getElementById("msg").innerHTML = error.message;
+      });
+    }
+  </script>
+
+</body>
+</html>
