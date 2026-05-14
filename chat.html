@@ -182,7 +182,7 @@ document.getElementById("userInput")
   }
 });
 
-const API_KEY = "gsk_J5...";
+//const API_KEY = "gsk_J5...";
 
 async function sendMessage(){
   let input = document.getElementById("userInput").value;
@@ -218,10 +218,10 @@ function addMessage(text, sender){
 let chatHistory = [];
 async function getBotReply(text){
   chatHistory.push({ role: "user", content: text });
-  const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+  const res = await fetch("https://aichatbot-backend-h0wb.onrender.com", {
     method: "POST",
     headers: {
-      "Authorization": "Bearer " + API_KEY,
+      "Authorization": "Bearer " + ${process.env.GEMINI_API_KEY},
       "Content-Type": "application/json"
     },
 
