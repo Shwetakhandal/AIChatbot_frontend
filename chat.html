@@ -216,25 +216,23 @@ function addMessage(text, sender){
 
 let chatHistory = [];
 async function getBotReply(text){
-  chatHistory.push({ role: "user", content: text });
-  const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Authorization": "Bearer " + API_KEY,
-      "Content-Type": "application/json"
-    },
 
-    body: JSON.stringify({
-      model: "llama-3.1-8b-instant",
-      messages: [{ role: "user", content: text }]
-    })
-  });
+  const res = await fetch(
+    "https://aichatbot-backend-h0wb.onrender.com/api/chat",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        message: text
+      })
+    }
+  );
 
   const data = await res.json();
-  return data.choices[0].message.content;
-  chatHistory.push({ role: "assistant", content: reply });
 
-  return reply;
+  return data.reply;
 }
 
 </script>
